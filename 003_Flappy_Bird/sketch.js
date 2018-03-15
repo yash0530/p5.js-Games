@@ -17,8 +17,7 @@ function draw() {
     flappy.display();
     flappy.update();
 
-    // creating a new block every 150 frames (2.5 seconds)
-    if (count++ % 150 === 0) {
+    if (count++ % (int) (2.5 * height / 10) === 0) {
         console.log("Block created");
         b[num++] = new Block();
     }
@@ -28,14 +27,18 @@ function draw() {
         if (b[i] != null) {
             b[i].display();
             b[i].update();
+
+            // checking for collisions
             if (b[i].x < flappy.x && (b[i].x + flappy.x) > 0) {
                 if (flappy.y < b[i].h1 || flappy.y > b[i].y2) {
                     console.log("DEATH");
                     b[i].displayRed();
-                    noLoop();
+                    noLoop(); // stops the game (execution draw() function)
                     reset();
                 }
             }
+
+            // checking if the block is active
             if (b[i].isDead()) { 
                 b[i] = null;
                 console.log("Block destroyed");
