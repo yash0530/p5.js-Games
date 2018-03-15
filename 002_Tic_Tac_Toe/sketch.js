@@ -2,9 +2,16 @@ board = [-1, -1, -1, -1, -1, -1, -1, -1, -1];
 circle = true;
 enterActive = false;
 mouseActive = true;
+var size;
 
 function setup() {
-    createCanvas(600, 600);
+    // ensuring that the maximum possible square is our game board
+    if (window.innerHeight > window.innerWidth) {
+        size = window.innerWidth;
+    } else {
+        size = window.innerHeight;
+    }
+    createCanvas(size, size);
     background(51);
     drawBoard();
 }
@@ -13,34 +20,34 @@ function drawBoard() {
     
     // printing the borders
     stroke(255);
-    line(200, 0, 200, 600);
-    line(400, 0, 400, 600);
-    line(0, 200, 600, 200);
-    line(0, 400, 600, 400);
+    line((size / 3), 0, (size / 3), size);
+    line(((2 * size) / 3), 0, ((2 * size) / 3), size);
+    line(0, (size / 3), size, (size / 3));
+    line(0, ((2 * size) / 3), size, ((2 * size) / 3));
 
     for (var i = 0; i < 9; i++) {
 
         // getting x and y ( centers of blocks )
         if ((i + 1) % 3 === 1) {
-            x = 100;
-            y = 100 + (((i + 1) % 3) - 1 + (int)((i + 1) / 3)) * 200;
+            x = (size / 6);
+            y = (size / 6) + (((i + 1) % 3) - 1 + (int)((i + 1) / 3)) * (size / 3);
         }
         else if ((i + 1) % 3 === 2) {
-            x = 300;
-            y = 100 + (((i + 1) % 3) - 2 + (int)((i + 1) / 3)) * 200;
+            x = (size / 2);
+            y = (size / 6) + (((i + 1) % 3) - 2 + (int)((i + 1) / 3)) * (size / 3);
         }
         else {
-            x = 500;
-            y = 100 + (((i + 1) % 3) - 1 + (int)((i + 1) / 3)) * 200;
+            x = ((5 * size) / 6);
+            y = (size / 6) + (((i + 1) % 3) - 1 + (int)((i + 1) / 3)) * (size / 3);
         }
 
         // printing symbols
         if (board[i] === 0) {
-            ellipse( x, y, 100, 100);
+            ellipse( x, y, (size / 6), (size / 6));
         }
         else if (board[i] === 1) {
-            line( x - 50, y - 50, x + 50, y + 50);
-            line(x + 50, y - 50, x - 50, y + 50);
+            line( x - (size / 12), y - (size / 12), x + (size / 12), y + (size / 12));
+            line(x + (size / 12), y - (size / 12), x - (size / 12), y + (size / 12));
         }
         else {}
     }
@@ -79,36 +86,36 @@ function mousePressed() {
 
         // getting the block number when mouse is pressed
         var n;
-        if (mouseX < 200) {
-            if (mouseY < 200) {
+        if (mouseX < (size / 3)) {
+            if (mouseY < (size / 3)) {
                 n = 0;
             }
-            else if (mouseY < 400) {
+            else if (mouseY < ((2 * size) / 3)) {
                 n = 3;
             }
-            else if (mouseY < 600) {
+            else if (mouseY < size) {
                 n = 6;
             }
         }
-        else if (mouseX < 400) {
-            if (mouseY < 200) {
+        else if (mouseX < ((2 * size) / 3)) {
+            if (mouseY < (size / 3)) {
                 n = 1;
             }
-            else if (mouseY < 400) {
+            else if (mouseY < ((2 * size) / 3)) {
                 n = 4;
             }
-            else if (mouseY < 600) {
+            else if (mouseY < size) {
                 n = 7;
             }
         }
-        else if (mouseX < 600) {
-            if (mouseY < 200) {
+        else if (mouseX < size) {
+            if (mouseY < (size / 3)) {
                 n = 2;
             }
-            else if (mouseY < 400) {
+            else if (mouseY < ((2 * size) / 3)) {
                 n = 5;
             }
-            else if (mouseY < 600) {
+            else if (mouseY < size) {
                 n = 8;
             }
         }
@@ -148,21 +155,21 @@ function hasWon(player) {
 
 function reset(player) {
     board = [-1, -1, -1, -1, -1, -1, -1, -1, -1];
-    createCanvas(600, 600);
+    createCanvas(size, size);
     background(51);
 
     fill(255);
-    textSize(32);
+    textSize(size / 18.75);
     if (player === 0) {
-        text("Player O has Won. !!\n\n\n\t\t\tPress Enter", 150, 300);
+        text("Player O has Won. !!\n\n\n\t\t\tPress Enter", (size / 4), (size / 2));
         console.log("Player O Won");
     }
     else if (player === 1) {
-        text("Player X has Won. !!\n\n\n\t\t\tPress Enter", 150, 300);
+        text("Player X has Won. !!\n\n\n\t\t\tPress Enter", (size / 4), (size / 2));
         console.log("Player X Won");
     }
     else if (player == -1) {
-        text("____ No result ____\n\n\n\t\t\tPress Enter", 150, 300);
+        text("____ No result ____\n\n\n\t\t\tPress Enter", (size / 4), (size / 2));
         console.log("Draw");
     }
 
@@ -174,7 +181,7 @@ function keyPressed() {
     if (enterActive && keyCode === ENTER) {
         enterActive = false;
         mouseActive = true;
-        createCanvas(600, 600);
+        createCanvas(size, size);
         background(51);
         drawBoard();
     }
