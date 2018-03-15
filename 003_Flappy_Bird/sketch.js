@@ -1,3 +1,4 @@
+var score = 0;
 var count = 0;
 var num = 0;
 
@@ -11,18 +12,35 @@ function setup() {
 
 function draw() {
     background(51);
+
+    // displaying the bird
     flappy.display();
     flappy.update();
 
-    if (count++ % 300 === 0) {
-        console.log("New block");
+    // creating a new block every 150 frames (2.5 seconds)
+    if (count++ % 150 === 0) {
+        console.log("Block created");
         b[num++] = new Block();
     }
+
+    // displaying all active blocks
     for (var i = 0; i < b.length; i++) {
         if (b[i] != null) {
             b[i].display();
             b[i].update();
-            if (b[i].isDead()) { b[i] = null; }
+            if (b[i].x < flappy.x && (b[i].x + flappy.x) > 0) {
+                if (flappy.y < b[i].h1 || flappy.y > b[i].y2) {
+                    console.log("DEATH");
+                    b[i].displayRed();
+                    noLoop();
+                    reset();
+                }
+            }
+            if (b[i].isDead()) { 
+                b[i] = null;
+                console.log("Block destroyed");
+                score++;
+            }
         }
     }
 }
@@ -37,4 +55,11 @@ function keyPressed() {
 function mousePressed() {
     flappy.tapped();
     console.log("Mouse Pressed");
+}
+
+function reset() {
+    console.log("Your Score : " + score);
+    fill(255);
+    textSize(height / 18);
+    text("Your Score : " + score, width / 5, height / 2)
 }

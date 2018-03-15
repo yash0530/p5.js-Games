@@ -13,12 +13,18 @@ function Block() {
     }
 
     this.update = function() {
-        this.x -= 1;
+        this.x -= 2;
     }
 
     this.isDead = function() {
         if (this.x < -this.width) {
             return true;
         } return false;
+    }
+    
+    this.displayRed = function() {
+        fill(255, 0, 0);
+        rect(this.x, this.y1, this.width, this.h1);
+        rect(this.x, this.y2, this.width, this.h2);
     }
 }
