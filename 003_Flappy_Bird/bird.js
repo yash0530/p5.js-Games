@@ -1,22 +1,24 @@
-function Bird() {
-    this.x = width / 8;
-    this.y = height / 2;
-    this.gravity = 0.5;
-    this.velocity = 0;
+function setup() {
+    createCanvas(window.innerHeight * 0.5625, window.innerHeight); // 16 : 9 vertical
+    background(51);
+    frameRate(120);
+    flappy = new Bird();
+}
 
-    this.display = function() {
-        ellipse(this.x, this.y, width / 15, width / 15);
-    }
+function draw() {
+    background(51);
+    flappy.display();
+    flappy.update();
+}
 
-    this.update = function() {
-        this.velocity += this.gravity;
-        this.y += this.velocity;
-        this.velocity = constrain(this.velocity, -1 * height / 80, height / 80);
-        this.y = constrain(this.y, 0, height);
-        console.log(this.velocity);
+function keyPressed() {
+    if (key === ' ') {
+        flappy.tapped();
+        console.log("Space Pressed");
     }
+}
 
-    this.tapped = function() {
-        this.velocity -= height / 40;
-    }
+function mousePressed() {
+    flappy.tapped();
+    console.log("Mouse Pressed");
 }
