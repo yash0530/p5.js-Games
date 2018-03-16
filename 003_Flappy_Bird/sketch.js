@@ -1,3 +1,4 @@
+enterActive = false;
 var score = 0;
 var count = 0;
 var num = 0;
@@ -33,8 +34,7 @@ function draw() {
                 if (flappy.y < b[i].h1 || flappy.y > b[i].y2) {
                     console.log("DEATH");
                     b[i].displayRed();
-                    noLoop(); // stops the game (execution draw() function)
-                    reset();
+                    stop();
                 }
             }
 
@@ -53,6 +53,10 @@ function keyPressed() {
         flappy.tapped();
         console.log("Space Pressed");
     }
+
+    if (keyCode === ENTER && enterActive) {
+        restart();
+    } 
 }
 
 function mousePressed() {
@@ -60,9 +64,22 @@ function mousePressed() {
     console.log("Mouse Pressed");
 }
 
-function reset() {
+function stop() {
     console.log("Your Score : " + score);
     fill(255);
     textSize(height / 18);
-    text("Your Score : " + score, width / 5, height / 2)
+    text("Score : " + score, width / 4, height / 2);
+    text("\nPress Enter", width / 4, height / 2);
+    enterActive = true;
+    noLoop();
+}
+
+function restart() {
+    b = [];
+    flappy.y = height / 2;
+    score = 0;
+    count = 0;
+    num = 0;
+    enterActive = false;
+    loop();
 }

@@ -1,7 +1,7 @@
 function Block() {
     this.x = width;
     this.y1 = 0;
-    this.h1 = Math.random() * height * 0.6;
+    this.h1 = Math.random() * height * 0.75;
     this.y2 = this.h1 + height * 0.25;
     this.h2 = height - this.y2;
     this.width = width / 4;
