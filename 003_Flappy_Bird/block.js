@@ -10,6 +10,8 @@ function Block() {
         fill(0, 255, 0);
         rect(this.x, this.y1, this.width, this.h1);
         rect(this.x, this.y2, this.width, this.h2);
+        line(this.x, this.h1 - (height / 15), this.x + this.width, this.h1 - (height / 15));
+        line(this.x, this.y2 + (height / 15), this.x + this.width, this.y2 + (height / 15));
     }
 
     this.update = function() {
@@ -26,5 +28,7 @@ function Block() {
         fill(255, 0, 0);
         rect(this.x, this.y1, this.width, this.h1);
         rect(this.x, this.y2, this.width, this.h2);
+        line(this.x, this.h1 - (height / 15), this.x + this.width, this.h1 - (height / 15));
+        line(this.x, this.y2 + (height / 15), this.x + this.width, this.y2 + (height / 15));
     }
 }

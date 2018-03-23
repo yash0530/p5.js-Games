@@ -6,11 +6,14 @@ var size;
 
 function setup() {
     // ensuring that the maximum possible square is our game board
-    if (window.innerHeight > window.innerWidth) {
-        size = window.innerWidth;
-    } else {
-        size = window.innerHeight;
-    }
+    size = windowHeight > windowWidth ? windowWidth : windowHeight;
+    createCanvas(size, size);
+    background(51);
+    drawBoard();
+}
+
+function windowResized() {
+    size = windowHeight > windowWidth ? windowWidth : windowHeight;
     createCanvas(size, size);
     background(51);
     drawBoard();
