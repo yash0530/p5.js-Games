@@ -15,7 +15,7 @@ function windowResized() {
 
 function drawBoard() {
     // printing the borders
-    stroke(96, 60, 40);
+    stroke(182, 116, 80);
     strokeWeight(size / 50);
     line(0 + size / 100, 0, 0 + size / 100, size);
     line((size / 4), 0, (size / 4), size);
