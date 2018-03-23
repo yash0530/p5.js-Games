@@ -49,8 +49,10 @@ function drawBoard() {
             ellipse( x, y, (size / 6), (size / 6));
         }
         else if (board[i] === 1) {
+            strokeWeight(size / 50);
             line( x - (size / 12), y - (size / 12), x + (size / 12), y + (size / 12));
             line(x + (size / 12), y - (size / 12), x - (size / 12), y + (size / 12));
+            strokeWeight(1);
         }
         else {}
     }

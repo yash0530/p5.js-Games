@@ -2,20 +2,20 @@ function setup() {
     // ensuring that the maximum possible square is our game board
     size = windowHeight > windowWidth ? windowWidth : windowHeight;
     createCanvas(size, size);
-    background(239, 228, 176);
+    background(244, 237, 204);
     drawBoard();
 }
 
 function windowResized() {
     size = windowHeight > windowWidth ? windowWidth : windowHeight;
     createCanvas(size, size);
-    background(239, 228, 176);
+    background(244, 237, 204);
     drawBoard();
 }
 
 function drawBoard() {
     // printing the borders
-    stroke(185, 120, 85);
+    stroke(96, 60, 40);
     strokeWeight(size / 50);
     line(0 + size / 100, 0, 0 + size / 100, size);
     line((size / 4), 0, (size / 4), size);
