@@ -4,7 +4,7 @@ var count = 0;
 var num = 0;
 
 function setup() {
-    createCanvas(window.innerHeight * 0.5625, window.innerHeight); // 16 : 9 vertical
+    createCanvas(windowHeight * 0.5625, windowHeight);
     background(51);
     frameRate(60);
     flappy = new Bird();
