@@ -27,26 +27,17 @@ function drawBoard() {
 
             noStroke();
             fill(182, 116, 80);
-
-            if (board[i] <= 8)
-                textSize(size / 5);
-            else if (board[i] <= 64)
-                textSize(size / 6);
-            else if (board[i] <= 512)
-                textSize(size / 7);
-            else if (board[i] <= 2048)
-                textSize(size / 10);
-
+            textSize(size / 10);
             textAlign(CENTER, BASELINE);
 
             if (i % 4 === 1)
-                text(board[i], (size / 8), size / 8 + ((i / 4) * (size / 4)));
+                text(board[i], (size / 8), size / 10 + ((i / 4) * (size / 4)));
             else if (i % 4 === 2)
-                text(board[i], (size / 8 + size / 4), size / 8 + (((i - 1) / 4) * (size / 4)));
+                text(board[i], (size / 8 + size / 4), size / 10 + (((i - 1) / 4) * (size / 4)));
             else if (i % 4 === 3)
-                text(board[i], (size / 8 + size / 2), size / 8 + (((i - 2) / 4) * (size / 4)));
+                text(board[i], (size / 8 + size / 2), size / 10 + (((i - 2) / 4) * (size / 4)));
             else if (i % 4 === 0)
-                text(board[i], (size - size / 8), size / 8 + (((i - 3) / 4) * (size / 4)));
+                text(board[i], (size - size / 8), size / 10 + (((i - 3) / 4) * (size / 4)));
         }
     }
 }
@@ -134,7 +125,7 @@ function updateDA() {
 }
 
 function updateLA() {
-    const swipeUp = function() {
+    const swipeLeft = function() {
         for (let i = 1; i <= 13; i += 4) {
             for (let c = 0; c < 3; c++) {
                 for (let j = i; j < i + 3; j++) {
@@ -162,14 +153,14 @@ function updateLA() {
         }
     }
 
-    swipeUp();
+    swipeLeft();
     combineBlocks();
-    swipeUp();
+    swipeLeft();
     addNew();
 }
 
 function updateRA() {
-    const swipeUp = function() {
+    const swipeRight = function() {
         for (let i = 16; i >= 4; i -= 4) {
             for (let c = 0; c < 3; c++) {
                 for (let j = i; j > i - 3; j--) {
@@ -197,9 +188,9 @@ function updateRA() {
         }
     }
 
-    swipeUp();
+    swipeRight();
     combineBlocks();
-    swipeUp();
+    swipeRight();
     addNew();
 }
 
