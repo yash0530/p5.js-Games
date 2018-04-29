@@ -5,14 +5,14 @@ var num = 0;
 
 function setup() {
     createCanvas(windowHeight * 0.5625, windowHeight);
-    background(51);
+    background(50, 50, 255);
     frameRate(60);
     flappy = new Bird();
     b = [];
 }
 
 function draw() {
-    background(51);
+    background(125, 125, 255);
 
     // displaying the bird
     flappy.display();

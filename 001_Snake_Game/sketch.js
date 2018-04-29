@@ -1,67 +1,69 @@
-var s;
-var scl = 20;
-var food;
-var isleftAllowed;
-var isRightAllowed;
-var isUpAllowed;
-var isDownAllowed;
+let isRightAllowed = true, isLeftAllowed = false, isUpAllowed = false, isDownAllowed = true;
+let snake, fruit, size, grid;
+let direction = 0;
+let score = 0;
 
 function setup() {
-    createCanvas(600, 600);
-    s = new Snake();
-    allowance(true, true, true, true);
+    generateBoard();
+    snake = new Snake();
+    fruit = new Fruit(grid);
     frameRate(10);
-    pickLocation();
+}
+
+function windowResized() {
+    generateBoard();
+    snake.display(grid);
+    fruit.display(grid);
 }
 
 function draw() {
-    background(53);
+    generateBoard();
+    snake.update(grid, direction);
+    snake.display(grid);
 
-    if(s.eat(food)) {
-        pickLocation();
+    if (snake.collided(fruit)) {
+        fruit = new Fruit(grid);
+        snake.addNew();
+        score++;
     }
-    s.death();
-    s.update();
-    s.show();
+    fruit.display(grid);
 
-    fill(255, 0, 100);
-    rect(food.x, food.y, scl, scl);
+    if (snake.isDead()) {
+        noLoop();
+    }
 
     // score
-	fill(255);
-	textSize(32);
-	text((s.len * 10 - 10), 530, 580, 50);
+	fill(255, 0, 255);
+	textSize(size / 20);
+	text(score * 10, size - size / 12, size - size / 25, size / 10);
+}
+
+function generateBoard() {
+    size = windowWidth > windowHeight ? windowHeight : windowWidth;
+    createCanvas(size, size);
+    background(51);
+    grid = floor(size / 25);
 }
 
 function keyPressed() {
-    if(keyCode === UP_ARROW && isUpAllowed) {
-        s.direction(0, -1);
+    if (keyCode === RIGHT_ARROW && isRightAllowed) {
+        direction = 1;
+        allowance(true, false, true, true);
+    } else if (keyCode === LEFT_ARROW && isLeftAllowed) {
+        direction = 2;
+        allowance(false, true, true, true);
+    } else if (keyCode === UP_ARROW && isUpAllowed) {
+        direction = 3;
+        allowance(true, true, true, false);
+    } else if (keyCode === DOWN_ARROW && isDownAllowed) {
+        direction = 4;
         allowance(true, true, false, true);
     }
-    else if(keyCode === DOWN_ARROW && isDownAllowed) {
-        s.direction(0, 1);
-        allowance(false, true, true, true);
-    }
-    else if(keyCode === LEFT_ARROW && isleftAllowed) {
-        s.direction(-1, 0);
-        allowance(true, false, true, true);
-    }
-    else if(keyCode === RIGHT_ARROW && isRightAllowed) {
-        s.direction(1, 0);
-        allowance(true, true, true, false);
-    }
 }
 
-function pickLocation() {
-    var cols = floor(width / scl);
-    var rows = floor(height / scl);
-    food = createVector(floor(random(cols)), floor(random(rows)));
-    food.mult(scl);
-}
-
-function allowance(up, right, down, left) {
-    isleftAllowed = left;
+function allowance(right, left, up, down) {
     isRightAllowed = right;
+    isLeftAllowed = left;
     isUpAllowed = up;
     isDownAllowed = down;
 }

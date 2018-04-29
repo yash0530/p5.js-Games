@@ -8,21 +8,22 @@ function setup() {
     // ensuring that the maximum possible square is our game board
     size = windowHeight > windowWidth ? windowWidth : windowHeight;
     createCanvas(size, size);
-    background(51);
+    background("#FFF176");
     drawBoard();
 }
 
 function windowResized() {
     size = windowHeight > windowWidth ? windowWidth : windowHeight;
     createCanvas(size, size);
-    background(51);
+    background("#FFF176");
     drawBoard();
 }
 
 function drawBoard() {
     
     // printing the borders
-    stroke(255);
+    stroke("#BF360C");
+    strokeWeight(size / 200);
     line((size / 3), 0, (size / 3), size);
     line(((2 * size) / 3), 0, ((2 * size) / 3), size);
     line(0, (size / 3), size, (size / 3));
@@ -46,9 +47,12 @@ function drawBoard() {
 
         // printing symbols
         if (board[i] === 0) {
+            fill("#43A047")
+            noStroke();
             ellipse( x, y, (size / 6), (size / 6));
         }
         else if (board[i] === 1) {
+            stroke("#E64A19")
             strokeWeight(size / 50);
             line( x - (size / 12), y - (size / 12), x + (size / 12), y + (size / 12));
             line(x + (size / 12), y - (size / 12), x - (size / 12), y + (size / 12));
@@ -161,21 +165,42 @@ function hasWon(player) {
 function reset(player) {
     board = [-1, -1, -1, -1, -1, -1, -1, -1, -1];
     createCanvas(size, size);
-    background(51);
+    background("#FFF176");
 
-    fill(255);
-    textSize(size / 18.75);
+    stroke("#BF360C");
+    fill("#FFF176");
+    strokeWeight(size / 200);
+    rect(size / 3, size / 3, size / 3, size / 3);
+
+    textSize(size / 15);
     if (player === 0) {
-        text("Player O has Won. !!\n\n\n\t\t\tPress Enter", (size / 4), (size / 2));
-        console.log("Player O Won");
+        fill("#43A047");
+        noStroke();
+        ellipse(size / 2, size / 2, (size / 6), (size / 6));
+        textAlign(CENTER);
+        text("PLAYER", 2 * size / 4, size / 6);
+        textAlign(CENTER);
+        text("WON", 2 * size / 4, 5 * size / 6);
     }
     else if (player === 1) {
-        text("Player X has Won. !!\n\n\n\t\t\tPress Enter", (size / 4), (size / 2));
-        console.log("Player X Won");
+        stroke("#E64A19");
+        strokeWeight(size / 50);
+        line( size / 2 - (size / 12), size / 2 - (size / 12), size / 2 + (size / 12), size / 2 + (size / 12));
+        line(size / 2 + (size / 12), size / 2 - (size / 12), size / 2 - (size / 12), size / 2 + (size / 12));
+        strokeWeight(1);
+        fill("#E64A19");
+        textAlign(CENTER);
+        text("PLAYER", 2 * size / 4, size / 6);
+        textAlign(CENTER);
+        text("WON", 2 * size / 4, 5 * size / 6);
     }
-    else if (player == -1) {
-        text("____ No result ____\n\n\n\t\t\tPress Enter", (size / 4), (size / 2));
-        console.log("Draw");
+    else if (player === -1) {
+        fill(0);
+        noStroke();
+        textAlign(CENTER);
+        text("NO", 2 * size / 4, size / 6);
+        textAlign(CENTER);
+        text("RESULT", 2 * size / 4, 5 * size / 6);
     }
 
     enterActive = true;
