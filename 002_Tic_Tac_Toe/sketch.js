@@ -8,18 +8,17 @@ function setup() {
     // ensuring that the maximum possible square is our game board
     size = windowHeight > windowWidth ? windowWidth : windowHeight;
     createCanvas(size, size);
-    background("#FFF176");
     drawBoard();
 }
 
 function windowResized() {
     size = windowHeight > windowWidth ? windowWidth : windowHeight;
     createCanvas(size, size);
-    background("#FFF176");
     drawBoard();
 }
 
 function drawBoard() {
+    background("#FFF176");
     
     // printing the borders
     stroke("#BF360C");
@@ -212,7 +211,6 @@ function keyPressed() {
         enterActive = false;
         mouseActive = true;
         createCanvas(size, size);
-        background(51);
         drawBoard();
     }
 }

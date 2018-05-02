@@ -46,6 +46,12 @@ function draw() {
             }
         }
     }
+
+    // score
+    fill(0);
+	textSize(width / 10);
+    textAlign(CENTER);
+	text(score * 10, 7 * width / 8, 7.5 * height / 8);
 }
 
 function keyPressed() {
@@ -65,11 +71,11 @@ function mousePressed() {
 }
 
 function stop() {
-    console.log("Your Score : " + score);
-    fill(255);
+    fill(0);
     textSize(height / 18);
-    text("Score : " + score, width / 4, height / 2);
-    text("\nPress Enter", width / 4, height / 2);
+    textAlign(CENTER);
+    text("SCORE " + score * 10, width / 2, height / 2);
+    text("\n\nPRESS ENTER", width / 2, height / 2);
     enterActive = true;
     noLoop();
 }

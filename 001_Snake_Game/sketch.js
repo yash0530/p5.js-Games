@@ -29,13 +29,14 @@ function draw() {
     fruit.display(grid);
 
     if (snake.isDead()) {
-        noLoop();
+        stop();
     }
 
     // score
 	fill(255, 0, 255);
 	textSize(size / 20);
-	text(score * 10, size - size / 12, size - size / 25, size / 10);
+    textAlign(CENTER);
+	text(score * 10, 7.5 * size / 8, 7.5 * size / 8);
 }
 
 function generateBoard() {
@@ -66,4 +67,12 @@ function allowance(right, left, up, down) {
     isLeftAllowed = left;
     isUpAllowed = up;
     isDownAllowed = down;
+}
+
+function stop() {
+    fill(175);
+    textSize(size / 18);
+    textAlign(CENTER);
+    text("SCORE " + score * 10, size / 2, size / 2);
+    noLoop();
 }
