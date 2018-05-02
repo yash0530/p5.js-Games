@@ -33,10 +33,10 @@ function draw() {
     }
 
     // score
-	fill(255, 0, 255);
-	textSize(size / 20);
+    fill(255, 0, 255);
+    textSize(size / 20);
     textAlign(CENTER);
-	text(score * 10, 7.5 * size / 8, 7.5 * size / 8);
+    text(score * 10, 7.5 * size / 8, 7.5 * size / 8);
 }
 
 function generateBoard() {
